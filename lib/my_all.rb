@@ -2,12 +2,14 @@ require 'pry'
 
 def my_all?(collection)
 	i = 0
-	keep_track = true
+	keep_track = []
 	while i < collection.length
-		result = yield collection[i]
-		keep_track = result == true ? true : false
+		keep_track << yield(collection[i])
 		i += 1
-		break if keep_track == false
 	end
-	return collection
+	if keep_track.include?(false)
+		return false
+	else
+		return true
+	end
 end
